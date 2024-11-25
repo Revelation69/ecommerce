@@ -12,8 +12,5 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql && \
     chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-# Copy the project files
-COPY ./Ecommerce-app-h /var/www/html
-
 # Expose PHP-FPM port
 EXPOSE 9000
