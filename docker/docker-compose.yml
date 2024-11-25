@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  ecommercedb:
+    build:
+      context: ./docker/db
+    image: revelation69/ecommerce-db
+    container_name: ecommercedb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ecommercedata:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=ecommerce_root_pass
+      - MYSQL_DATABASE=ecommerce_db
+      - MYSQL_USER=ecommerce_user
+      - MYSQL_PASSWORD=ecommerce_user_pass
+
+  ecommercecache01:
+    image: memcached
+    ports:
+      - "11211:11211"
+
+  ecommercemq01:
+    image: rabbitmq
+    ports:
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  ecommerceapp:
+    build:
+      context: ./docker/app
+    image: revelation69/ecommerce-app
+    container_name: ecommerceapp
+    ports:
+      - "9000:9000"  # PHP-FPM port
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - ecommercedb
+
+  ecommerceweb:
+    build:
+      context: ./docker/web
+    image: revelation69/ecommerce-web
+    container_name: ecommerceweb
+    ports:
+      - "8080:80"  # Nginx port
+    volumes:
+      - ./app:/var/www/html
+    depends_on:
+      - ecommerceapp
+
+volumes:
+  ecommercedbdata: {}
+  ecommerceappdata: {}
