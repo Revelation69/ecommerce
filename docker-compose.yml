@@ -1,7 +1,7 @@
 services:
   ecommercedb:
     build:
-      context: .
+      context: ./db
     image: revelation6991/ecommerce-db
     container_name: ecommercedb
     ports:
@@ -14,44 +14,31 @@ services:
       - MYSQL_USER=ecommerce_user
       - MYSQL_PASSWORD=ecommerce_user_pass
 
-  ecommercecache01:
-    image: memcached
-    ports:
-      - "11211:11211"
-
-  ecommercemq01:
-    image: rabbitmq
-    ports:
-      - "15672:15672"
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
-
   ecommerceapp:
     build:
-      context: .
+      context: ./app
     image: revelation6991/ecommerce-app
     container_name: ecommerceapp
     ports:
-      - "9000:9000"  # PHP-FPM port
+      - "9000:9000"
     volumes:
-      - ecommerceappdata:/var/www/html
+      # Mount local web files into the container
+      - ./Ecommerce-app-h:/var/www/html
     depends_on:
       - ecommercedb
 
   ecommerceweb:
     build:
-      context: .
+      context: ./web
     image: revelation6991/ecommerce-web
     container_name: ecommerceweb
     ports:
-      - "8080:80"  # Nginx port
+      - "8080:80"
     volumes:
-      - ecommercewebdata:/var/www/html
+      # Ensure this matches the runtime location of web files
+      - ./Ecommerce-app-h:/var/www/html
     depends_on:
       - ecommerceapp
 
 volumes:
-  ecommercedbdata: {}
-  ecommerceappdata: {}
-  ecommercewebdata: {}
+  ecommercedbdata:
