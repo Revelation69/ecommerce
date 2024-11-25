@@ -4,7 +4,7 @@ FROM nginx:alpine
 COPY default.conf /etc/nginx/conf.d/default.conf
 
 # Copy the application files (optional, if served by Nginx directly)
-COPY Ecommerce-app-h/ /var/www/html
+COPY ../../ /var/www/html
 
 # Expose the HTTP port
 EXPOSE 80
