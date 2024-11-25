@@ -1,7 +1,7 @@
 services:
   ecommercedb:
     build:
-      context: ./db
+      context: .
     image: revelation6991/ecommerce-db
     container_name: ecommercedb
     ports:
@@ -29,28 +29,29 @@ services:
 
   ecommerceapp:
     build:
-      context: ./app
+      context: .
     image: revelation6991/ecommerce-app
     container_name: ecommerceapp
     ports:
       - "9000:9000"  # PHP-FPM port
     volumes:
-      - ./app:/var/www/html
+      - ecommerceappdata:/var/www/html
     depends_on:
       - ecommercedb
 
   ecommerceweb:
     build:
-      context: ./web
+      context: .
     image: revelation6991/ecommerce-web
     container_name: ecommerceweb
     ports:
       - "8080:80"  # Nginx port
     volumes:
-      - ./app:/var/www/html
+      - ecommercewebdata:/var/www/html
     depends_on:
       - ecommerceapp
 
 volumes:
   ecommercedbdata: {}
   ecommerceappdata: {}
+  ecommercewebdata: {}
