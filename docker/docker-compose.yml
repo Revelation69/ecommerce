@@ -3,7 +3,7 @@ services:
   ecommercedb:
     build:
       context: ./docker/db
-    image: revelation69/ecommerce-db
+    image: revelation6991/ecommerce-db
     container_name: ecommercedb
     ports:
       - "3306:3306"
@@ -31,7 +31,7 @@ services:
   ecommerceapp:
     build:
       context: ./docker/app
-    image: revelation69/ecommerce-app
+    image: revelation6991/ecommerce-app
     container_name: ecommerceapp
     ports:
       - "9000:9000"  # PHP-FPM port
@@ -43,7 +43,7 @@ services:
   ecommerceweb:
     build:
       context: ./docker/web
-    image: revelation69/ecommerce-web
+    image: revelation6991/ecommerce-web
     container_name: ecommerceweb
     ports:
       - "8080:80"  # Nginx port
