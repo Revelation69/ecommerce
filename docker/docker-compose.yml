@@ -1,14 +1,13 @@
-version: '3.8'
 services:
   ecommercedb:
     build:
-      context: ./docker/db
+      context: ./db
     image: revelation6991/ecommerce-db
     container_name: ecommercedb
     ports:
       - "3306:3306"
     volumes:
-      - ecommercedata:/var/lib/mysql
+      - ecommercedbdata:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=ecommerce_root_pass
       - MYSQL_DATABASE=ecommerce_db
@@ -30,7 +29,7 @@ services:
 
   ecommerceapp:
     build:
-      context: ./docker/app
+      context: ./app
     image: revelation6991/ecommerce-app
     container_name: ecommerceapp
     ports:
@@ -42,7 +41,7 @@ services:
 
   ecommerceweb:
     build:
-      context: ./docker/web
+      context: ./web
     image: revelation6991/ecommerce-web
     container_name: ecommerceweb
     ports:
