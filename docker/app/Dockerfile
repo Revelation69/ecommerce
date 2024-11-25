@@ -7,14 +7,13 @@ LABEL "Author"="Revelation69"
 # Set the working directory
 WORKDIR /var/www/html
 
-# Install required PHP extensions
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Install required PHP extensions and set permissions
+RUN docker-php-ext-install mysqli pdo pdo_mysql && \
+    chown -R www-data:www-data /var/www/html && \
+    chmod -R 755 /var/www/html
 
 # Copy the project files
-COPY ./Ecommerce-app-h .
-
-# Set ownership and permissions for the web server
-RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+COPY ./Ecommerce-app-h /var/www/html
 
 # Expose PHP-FPM port
 EXPOSE 9000
