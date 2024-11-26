@@ -2,10 +2,10 @@
 
 require "config/constants.php";
 
-$servername = HOST;
-$username = USER;
-$password = PASSWORD;
-$db = DATABASE_NAME;
+$servername = ecommercedb;
+$username = ecommerce_user;
+$password = ecommerce_user_pass;
+$db = ecommerce_db;
 
 // Create connection
 $con = mysqli_connect($servername, $username, $password,$db);
