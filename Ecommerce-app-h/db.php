@@ -4,7 +4,7 @@ require "config/constants.php";
 
 $servername = ecommercedb;
 $username = ecommerce_user;
-$password = ecommerce_user_pass;
+$password = ecommerce_root_pass;
 $db = ecommerce_db;
 
 // Create connection
