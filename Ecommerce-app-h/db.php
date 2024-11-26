@@ -2,7 +2,7 @@
 
 require "config/constants.php";
 
-$servername = ecommercedb;
+$servername = ecommerce_db;
 $username = ecommerce_user;
 $password = ecommerce_root_pass;
 $db = ecommerce_db;
