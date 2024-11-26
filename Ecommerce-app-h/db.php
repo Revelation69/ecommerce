@@ -2,9 +2,9 @@
 
 require "config/constants.php";
 
-$servername = 'ecommerce_db';
+$servername = 'ecommercedb';
 $username = 'ecommerce_user';
-$password = 'ecommerce_root_pass';
+$password = 'ecommerce_user_pass';
 $db = 'ecommerce_db';
 
 // Create connection
