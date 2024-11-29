@@ -41,6 +41,5 @@ services:
       - ecommerceapp
 
 volumes:
-  ecommercedbdata:
+  ecommercedbdata
 
-yipee!
